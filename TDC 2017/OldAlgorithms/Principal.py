@@ -44,7 +44,7 @@ class Principal(object):
 		'''parâmetro obrigatórios para selecionar as carcterísticas das tabelas'''
 
 		# colunas da tabela normal (sem janelamento) para selecionar as caracteristicas (-1 siginifica última coluna (rotulo))'''
-		colunas = [[0, 1, 2, 3, -1]]
+		colunas = [[0, 1, 2, -1]]
 
 		'''parâmetros que servem apenas para nomear o arquivo txt (recomendo usar para ficar organizado a descrição da execução!!!'''
 
@@ -99,6 +99,7 @@ class Principal(object):
 								'gamma': svm_gamma
 							}
 							contador += 1
+							
 							self.__resultado = intermediario(experimento,estrategia,parametros_svm,dados,dados_treino_teste,dados_janelamento,contador)
 	def Fscore(self):
 		return self.__resultado['f_score_mc']

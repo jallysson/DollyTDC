@@ -8,8 +8,8 @@ class Person(object):
 
 	def __init__(self):
 
-		self.__c = random.randint(1, 100)
-		self.__gamma = random.uniform(0, 1)
+		self.__c = random.randint(1, 1000)
+		self.__gamma = random.uniform(0, 100)
 		self.__windowPosition = random.choice(self.__WINDOW_LABEL)
 		self.__windowSize = random.randint(1, 100)
 

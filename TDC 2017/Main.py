@@ -11,9 +11,9 @@ class Main(object):
 
 	def __init__(self):
 
-		self.__populationSize = 50
+		self.__populationSize = 100
 
-		self.__numberGenerations = 20
+		self.__numberGenerations = 50
 
 		self.__progress = []
 
@@ -24,6 +24,10 @@ class Main(object):
 		population = [ Person().CreatePerson() for person in range(self.__populationSize) ]
 
 		for generation in range(self.__numberGenerations):
+
+			print "----------------------------------"
+
+			print generation, progressGraph.FitnessProgression(population)
 
 			self.__progress.append(progressGraph.FitnessProgression(population))
 
