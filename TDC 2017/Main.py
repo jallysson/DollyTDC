@@ -3,42 +3,49 @@
 import sys
 sys.path.append("OldAlgorithms")
 
+from Parameters import *
 from Person import Person
 from GeneticAlgorithm import GeneticAlgorithm
 from ProgressGraph import ProgressGraph
 
 class Main(object):
 
+	__MAXIMUM_INDEX = 0
+	__MINIMUM_INDEX = 1
+
 	def __init__(self):
-
-		self.__populationSize = 100
-
-		self.__numberGenerations = 50
 
 		self.__progress = []
 
-		geneticAlgorithm = GeneticAlgorithm()
+		population = [ Person().CreatePerson() for person in range(populationSize) ]
 
-		progressGraph = ProgressGraph()
+		numberMutation = 0
 
-		population = [ Person().CreatePerson() for person in range(self.__populationSize) ]
+		for generation in range(numberGenerations):
 
-		for generation in range(self.__numberGenerations):
+			numberMutation += 1
 
-			print "----------------------------------"
+			if (numberMutation == mutation):
 
-			print generation, progressGraph.FitnessProgression(population)
+				population = GeneticAlgorithm().RandomMutation(population)
 
-			self.__progress.append(progressGraph.FitnessProgression(population))
+				numberMutation = 0
 
-			selected = geneticAlgorithm.SelectionByClassification(population)
+			print generation, ProgressGraph().FitnessProgression(population)
 
-			population = geneticAlgorithm.ExchangeOfPopulationForAll(selected, population)
+			self.__progress.append(ProgressGraph().FitnessProgression(population))
 
-		maximum = [x[0] for x in self.__progress]
-		minimum = [x[1] for x in self.__progress]
+			children = []
 
-		progressGraph.Graph(range(self.__numberGenerations), maximum, minimum)
+			for cross in range((len(population) * crossover) / 100):
 
+				children.append(GeneticAlgorithm().CrossoverOnePoint(GeneticAlgorithm().
+					SelectionByClassification((len(population) * selection) / 100, population)))
+
+			population = GeneticAlgorithm().ExchangeOfBest(children, population)
+
+		maximum = [fscore[self.__MAXIMUM_INDEX] for fscore in self.__progress]
+		minimum = [fscore[self.__MINIMUM_INDEX] for fscore in self.__progress]
+
+		ProgressGraph().Graph(range(numberGenerations), maximum, minimum)
 Main()
-		

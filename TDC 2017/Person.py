@@ -8,17 +8,17 @@ class Person(object):
 
 	def __init__(self):
 
-		self.__c = random.randint(1, 1000)
-		self.__gamma = random.uniform(0, 100)
+		self.__c = 0.001
+		self.__gamma = 0.001
 		self.__windowPosition = random.choice(self.__WINDOW_LABEL)
-		self.__windowSize = random.randint(1, 100)
+		self.__windowSize = 1
 
 	def CreatePerson(self):
 
 		__person = [
-			self.__c, '*',
-			self.__gamma, '*',
-			self.__windowSize, '*',
+			self.__c,
+			self.__gamma,
+			self.__windowSize,
 			self.__windowPosition
 		]
 

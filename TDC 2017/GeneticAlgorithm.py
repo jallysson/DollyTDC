@@ -10,50 +10,53 @@ from CrossoverOnePointOrder import crossover_one_point_order
 
 class GeneticAlgorithm(object):
 
-	fitness = {}
+	__fitness = {}
+
+	__PERSON_INDEX = 1
+	__NUMBER_OF_PARENTS = 2
+	__FIRST = 0
+	__SECOND = 1
+
+	__REST = 0
+	__PREPARATION = 1
+	__HOLD = 2
+	__STROKE = 3
+	__RETRACTION = 4
+
+	__C = 0
+	__GAMMA = 1
+	__WINDOW_SIZE = 2
+	__WINDOW_POSITION = 3
 
 	def __init__(self):
 		pass
 
-	def SelectionByClassification(self, population):
-
-		self.__numberOfChildren = 10
+	def SelectionByClassification(self, selection, population):
 
 		marked = [(self.FitnessCalculator(person), person) for person in population]
-		marked = [person[1] for person in sorted(marked)]
+		marked = [person[self.__PERSON_INDEX] for person in sorted(marked)]
 
-		selected = marked[(len(marked) - self.__numberOfChildren):]
+		selected = marked[(len(marked) - selection):]
 
 		return selected
 
-	def ExchangeOfPopulationForAll(self, selected, population):
+	def ExchangeOfBest(self, children, population):
 
 		sizePopulation = len(population)
-		children = self.__CrossoverOnePoint(selected)
 
-		mutationRate = (len(population) * 3) / 100
-		crossoverRate = (len(population) * 30) / 100
+		for son in children:
+			population.append(son[self.__PERSON_INDEX])
 
-		for x in range(crossoverRate):
+		population = [person for person in sorted(population)]
 
-			marked = [(self.FitnessCalculator(son), son) for son in children]
-			marked = [son[1] for son in sorted(marked)]
-			population.append(marked[-1])
+		return population[len(population) - sizePopulation:]
 
-		for x in range(mutationRate):
+	def CrossoverOnePoint(self, selected):
 
-			population = self.__RandomMutation(population)
+		parents = random.sample(selected, self.__NUMBER_OF_PARENTS)
 
-		test = [person for person in sorted(population)]
-
-		return test[len(population) - sizePopulation:]
-
-	def __CrossoverOnePoint(self, selected):
-
-		parents = random.sample(selected, 2)
-
-		firstFather = parents[0]
-		secondFather = parents[1]
+		firstFather = parents[self.__FIRST]
+		secondFather = parents[self.__SECOND]
 
 		point = random.randint(1, len(firstFather) - 2)
 
@@ -66,33 +69,33 @@ class GeneticAlgorithm(object):
 		return firstSon, secondSon
 
 	def FitnessCalculator(self, person):
-		keys = self.fitness.keys()
+		keys = self.__fitness.keys()
 
 		if (str(person) in keys):
-			measure = self.fitness[str(person)], person
+			measure = self.__fitness[str(person)], person
 
 		else:
 
-			measure = Principal(person[0], person[2], person[4], person[6])
-			self.fitness[str(person)] = sum(measure.Fscore())
+			measure = Principal(person[self.__C], person[self.__GAMMA], person[self.__WINDOW_SIZE], person[self.__WINDOW_POSITION])
 
-		return self.fitness[str(person)]
+			measure = measure.Fscore()[self.__PREPARATION]
 
-	def __RandomMutation(self, population):
+			self.__fitness[str(person)] = measure
 
-		__WINDOW_LABEL = ['inicio', 'meio', 'fim']
+		return self.__fitness[str(person)]
+
+	def RandomMutation(self, population):
+
+		WINDOW_LABEL = ['inicio', 'meio', 'fim']
+
 		personId = random.randint(0, len(population) - 1)
 
 		person = population[personId]
 		geneId = random.randint(0, len(person) - 1)
 
-		while (person[geneId] == "*"):
-
-			geneId = random.randint(0, len(person) - 1)
-
 		if (type(person[geneId]) is int):
 
-			person[geneId] = random.randint(1, 10)
+			person[geneId] = random.randint(1, 50)
 			population[personId] = person
 
 		if (type(person[geneId]) is float):
@@ -102,7 +105,7 @@ class GeneticAlgorithm(object):
 
 		if (type(person[geneId]) is str):
 
-			person[geneId] = random.choice(__WINDOW_LABEL)
+			person[geneId] = random.choice(WINDOW_LABEL)
 			population[personId] = person
 
 		return population
