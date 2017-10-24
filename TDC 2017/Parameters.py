@@ -4,8 +4,8 @@ populationSize = 50
 
 numberGenerations = 100
 
-crossover = 10
+crossover = 15
 
-mutation = 5
+mutation = 3
 
-selection = 10
+selection = 30

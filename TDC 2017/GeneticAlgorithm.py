@@ -73,12 +73,11 @@ class GeneticAlgorithm(object):
 
 		if (str(person) in keys):
 			measure = self.__fitness[str(person)], person
-
 		else:
 
 			measure = Principal(person[self.__C], person[self.__GAMMA], person[self.__WINDOW_SIZE], person[self.__WINDOW_POSITION])
 
-			measure = measure.Fscore()[self.__PREPARATION]
+			measure = measure.Fscore()[self.__RETRACTION]
 
 			self.__fitness[str(person)] = measure
 
@@ -95,7 +94,7 @@ class GeneticAlgorithm(object):
 
 		if (type(person[geneId]) is int):
 
-			person[geneId] = random.randint(1, 50)
+			person[geneId] = random.randint(1, 30)
 			population[personId] = person
 
 		if (type(person[geneId]) is float):
