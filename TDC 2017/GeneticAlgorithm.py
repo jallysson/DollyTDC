@@ -77,7 +77,7 @@ class GeneticAlgorithm(object):
 
 			measure = Principal(person[self.__C], person[self.__GAMMA], person[self.__WINDOW_SIZE], person[self.__WINDOW_POSITION])
 
-			measure = measure.Fscore()[self.__RETRACTION]
+			measure = measure.Fscore()[self.__PREPARATION]
 
 			self.__fitness[str(person)] = measure
 

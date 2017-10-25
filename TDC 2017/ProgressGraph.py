@@ -1,6 +1,7 @@
 # coding=UTF-8
 
 import numpy as np
+import operator
 import matplotlib.pyplot as plt
 
 from GeneticAlgorithm import GeneticAlgorithm
@@ -28,4 +29,6 @@ class ProgressGraph(object):
 
 		fitness = [self.geneticAlgorithm.FitnessCalculator(person) for i, person in enumerate(population)]
 
-		return max(fitness), min(fitness)
+		index, value = max(enumerate(fitness), key=operator.itemgetter(1))
+
+		return max(fitness), min(fitness), population[index]

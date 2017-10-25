@@ -1,11 +1,11 @@
 # coding=UTF-8
 
-populationSize = 50
+populationSize = 25
 
 numberGenerations = 100
 
-crossover = 15
+crossover = 10
 
-mutation = 3
+mutation = 10
 
-selection = 30
+selection = 10
