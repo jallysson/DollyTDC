@@ -1,11 +1,19 @@
 # coding=UTF-8
 
-populationSize = 25
+from Main import Main
 
-numberGenerations = 100
+class Parameters(object):
 
-crossover = 10
+	def __init__(self):
+		self._populationSize = 25
+		self._numberGenerations = 100
+		self._crossover = 10
+		self._mutation = 10
+		self._selection = 10
 
-mutation = 10
+	def Run(self):
+		main = Main(self._populationSize, self._numberGenerations, self._crossover, self._mutation, self._selection)
+		main.Run()
 
-selection = 10
+parameters = Parameters()
+parameters.Run()

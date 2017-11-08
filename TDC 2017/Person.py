@@ -4,22 +4,19 @@ import random
 
 class Person(object):
 
-	__WINDOW_LABEL = ['inicio', 'meio', 'fim']
+	_WINDOW_LABEL = ['inicio', 'meio', 'fim']
 
 	def __init__(self):
-
-		self.__c = 0.001
-		self.__gamma = 0.001
-		self.__windowPosition = random.choice(self.__WINDOW_LABEL)
-		self.__windowSize = 1
+		self._c = 0.001
+		self._gamma = 0.001
+		self._windowPosition = random.choice(self._WINDOW_LABEL)
+		self._windowSize = 1
 
 	def CreatePerson(self):
+		_person = [ self._c, self._gamma, self._windowSize, self._windowPosition ]
 
-		__person = [
-			self.__c,
-			self.__gamma,
-			self.__windowSize,
-			self.__windowPosition
-		]
+		return _person
 
-		return __person
+person = Person()
+
+# print 'Cromossomo: ' + str(person.CreatePerson())

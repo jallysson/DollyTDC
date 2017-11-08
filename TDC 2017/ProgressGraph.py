@@ -13,9 +13,8 @@ class ProgressGraph(object):
 		self.geneticAlgorithm = GeneticAlgorithm()
 
 	def Graph(self, generations, maximum, minimum):
-
-		plt.scatter(generations, maximum, s = np.pi * 10, c = '#2EB872', alpha=0.5)
-		plt.scatter(generations, minimum, s = np.pi * 10, c = '#363333', alpha=0.5)
+		plt.plot(generations, maximum, ls = '', marker='o', c = '#2EB872', alpha = 0.5)
+		plt.plot(generations, minimum, ls = '', marker='o', c = '#363333', alpha = 0.5)
 
 		plt.title('Progressao do fitness', fontsize = 12, fontweight = 'normal')
 		plt.xlabel('Geracoes', fontsize = 12)
