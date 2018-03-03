@@ -1,3 +1,3 @@
 # TheDevelopersConference2017
 
-[[https://github.com/Jallyssonmr/Dolly/blob/icone/Dolly.png|alt=icone]]
+[[https://github.com/Jallyssonmr/Dolly/Dolly.png|alt=icone]]
