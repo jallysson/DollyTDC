@@ -1,2 +1,2 @@
 # Dolly
-:sheep: 
+:sheep: Machine Learning with Genetic Algorithm
