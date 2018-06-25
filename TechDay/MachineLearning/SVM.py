@@ -4,7 +4,7 @@
 from sklearn import svm
 
 #executa o SVM do python com os parâmetros passados
-def executa_svm(kernel,c,gamma,treino,teste):
+def executa_svm(kernel, c, gamma, treino, teste):
     clf = svm.SVC(
     	kernel=kernel, 
     	C=c,

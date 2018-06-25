@@ -72,6 +72,8 @@ class GeneticAlgorithm(object):
 
 		point = random.randint(1, len(firstFather) - 2)
 
+		#print 'Point: ' + str(point)
+
 		firstSon = [firstFather[x] for x in range(point)]
 		firstSon = firstSon + [secondFather[x] for x in range(point, len(secondFather))]
 
@@ -95,7 +97,7 @@ class GeneticAlgorithm(object):
 
 			measure = Principal(person[self._C], person[self._GAMMA], person[self._WINDOW_SIZE], person[self._WINDOW_POSITION])
 
-			measure = measure.Fscore()#[self._PREPARATION]
+			measure = measure.Fscore()
 
 			self._fitness[str(person)] = sum(measure)
 
